@@ -14,6 +14,15 @@ import jwt, datetime
 class RegisterView(APIView):
     @csrf_exempt
     def post(self, request):
+        user = User.objects.filter(username=request.data['username']).first()
+        usermail = User.objects.filter(email=request.data['email']).first()
+        
+        if user is not None:
+            return JsonResponse({'message': 'Username already used'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if usermail is not None:
+            return JsonResponse({'message': 'Email already used'}, status=status.HTTP_400_BAD_REQUEST)
+        
         serializer = UserSerializer(data = request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
