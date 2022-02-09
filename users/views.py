@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
 
 from django.http.response import JsonResponse
 from .serializers import UserSerializer
@@ -11,6 +12,7 @@ import jwt, datetime
 
 # Create your views here.
 class RegisterView(APIView):
+    @csrf_exempt
     def post(self, request):
         serializer = UserSerializer(data = request.data)
         if serializer.is_valid(raise_exception=True):
@@ -19,6 +21,7 @@ class RegisterView(APIView):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class LoginView(APIView):
+    @csrf_exempt
     def post(self, request):
         username = request.data['username']
         password = request.data['password']
@@ -46,7 +49,7 @@ class LoginView(APIView):
     
 
 class UserView(APIView):
-    
+    @csrf_exempt
     def get(self, request):
         token = request.COOKIES.get('jwt')
         
@@ -64,6 +67,7 @@ class UserView(APIView):
     
     
 class LogoutView(APIView):
+    @csrf_exempt
     def post(self, request):
         response = Response()
         response.delete_cookie('jwt')
