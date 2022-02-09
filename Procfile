@@ -1,0 +1,1 @@
+web: gunicorn yugioh.wsgi --log-file -
