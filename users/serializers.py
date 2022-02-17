@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Decks
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,3 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()    
         return instance
+    
+class DeckSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        db_table = 'decks'
+        model = Decks
+        fields = ('id','username', 'name_deck', 'card')

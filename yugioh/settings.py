@@ -83,9 +83,9 @@ WSGI_APPLICATION = 'yugioh.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'djongo',
-            'NAME': 'yugioh_db',
+            'NAME': 'yugimon_db',
             'CLIENT': {
-                'host': 'mongodb+srv://terkoiz:manusia256@yugioh.cd7wk.mongodb.net/yugioh_db?retryWrites=true&w=majority'
+                'host': 'mongodb+srv://terkoiz:manusia256@yugioh.cd7wk.mongodb.net/yugimon_db?retryWrites=true&w=majority'
             }  
         }
 }
