@@ -4,7 +4,7 @@ from .views import RegisterView, LoginView, UserView, LogoutView, DeckRegisterVi
 urlpatterns = [
     re_path('register', RegisterView.as_view()),
     re_path('login', LoginView.as_view()),
-    re_path('user', UserView.as_view()),
+    re_path('profile', UserView.as_view()),
     re_path('logout', LogoutView.as_view()),
     re_path('add_deck', DeckRegisterView.as_view()),
     re_path('user_deck', DeckView.as_view()),

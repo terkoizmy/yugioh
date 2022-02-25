@@ -62,7 +62,7 @@ class LoginView(APIView):
 class UserView(APIView):
     @csrf_exempt
     def get(self, request):
-        token = request.COOKIES.get('jwt')
+        token = request.headers.get('jwt')
         
         if not token:
             raise AuthenticationFailed('Unauthenticated!')
@@ -78,6 +78,7 @@ class UserView(APIView):
             return JsonResponse({'message': 'User Not Found'}, status=status.HTTP_404_NOT_FOUND)
         
         user = User.objects.filter(id=payload['id']).first()
+        print(user)
         serializer = UserSerializer(user)
         return Response(serializer.data)
        
@@ -93,7 +94,7 @@ class LogoutView(APIView):
 class DeckView(APIView):
     @csrf_exempt
     def get(self, request):
-        token = request.COOKIES.get('jwt')
+        token = request.headers.get('jwt')
         if not token:
             raise AuthenticationFailed('Unauthenticated! you need login first')
         try:
@@ -106,8 +107,9 @@ class DeckView(APIView):
         if Author is None:
             return JsonResponse({'message': 'User Not Found'}, status=status.HTTP_404_NOT_FOUND)
         
-        
+        print(payload)
         deck = Decks.objects.filter(username = payload['username'])
+        print(deck)
         serializer = DeckSerializer(deck, many=True)
         
         return Response(serializer.data)
@@ -116,7 +118,7 @@ class DeckRegisterView(APIView):
     @csrf_exempt
     def post(self, request):
         # Authenticate
-        token = request.COOKIES.get('jwt')
+        token = request.headers.get('jwt')
         if not token:
             raise AuthenticationFailed('Unauthenticated! you need login first')
         try:
@@ -127,9 +129,10 @@ class DeckRegisterView(APIView):
         # Authorization
         
         Author = User.objects.filter(username = payload['username'])
+        print(Author)
         
         if Author is None:
-            return JsonResponse({'message': 'User Not Found'}, status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse({'message': 'User or Deck Not Found'}, status=status.HTTP_404_NOT_FOUND)
             
         
         data = {
@@ -166,6 +169,19 @@ class PickDeck(APIView):
 class SaveDeck(APIView):
     @csrf_exempt
     def put(self, request, pk):
+        token = request.headers.get('jwt')
+        
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Unauthenticated!')
+        
+        Author = User.objects.filter(username = payload['username'], name_deck= request.data['name_deck'])
+        if Author is None:
+            return JsonResponse({'message': 'User Not Found'}, status=status.HTTP_404_NOT_FOUND)
+        
         deck = Decks.objects.get(pk=pk)
         if deck is None:
             return JsonResponse({'message': 'Deck not found'}, status=status.HTTP_404_NOT_FOUND)
