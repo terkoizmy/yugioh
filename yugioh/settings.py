@@ -54,6 +54,9 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",
+
 ]
 
 # CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
@@ -67,6 +70,32 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'yugioh.urls'
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.example\.com$",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "jwt,"
+]
 
 TEMPLATES = [
     {
