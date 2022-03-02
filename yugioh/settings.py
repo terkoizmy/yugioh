@@ -67,14 +67,6 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w+\.example\.com$",
 ]
 
-CORS_ALLOW_METHODS = [
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-]
-
 
 ROOT_URLCONF = 'yugioh.urls'
 
