@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from pickle import TRUE
-from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,6 +54,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",
 ]
 
 CORS_ALLOW_ALL = True
@@ -66,21 +67,14 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w+\.example\.com$",
 ]
 
-# CORS_ALLOW_HEADERS = [
-#     "accept",
-#     "accept-encoding",
-#     "authorization",
-#     "content-type",
-#     "dnt",
-#     "origin",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with"
-# ]
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    "my-custom-header",
+CORS_ALLOW_METHODS = [
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
+
 
 ROOT_URLCONF = 'yugioh.urls'
 
