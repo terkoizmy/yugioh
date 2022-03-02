@@ -54,8 +54,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "corsheaders.middleware.CorsPostCsrfMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
+    # "corsheaders.middleware.CorsPostCsrfMiddleware",
 
 ]
 
@@ -71,9 +71,9 @@ CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'yugioh.urls'
 
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\.example\.com$",
-]
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^https://\w+\.example\.com$",
+# ]
 
 CORS_ALLOW_METHODS = [
     "DELETE",
