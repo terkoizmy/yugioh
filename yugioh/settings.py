@@ -69,18 +69,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-
-
-# CORS_ALLOWED_ORIGIN_REGEXES = [
-#     r"^https://\w+\.example\.com$",
-# ]
-
-CORS_ALLOW_METHODS = [
-    "POST",
-]
-
-CORS_ALLOW_HEADERS = [
-    "jwt,"
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.example\.com$",
 ]
 
 ROOT_URLCONF = 'yugioh.urls'
