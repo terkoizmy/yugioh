@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-wf2g6d-@c-8l2i^ns-ha(-d1v^k)p2xvw!-t^744$iva@r*^^i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*', 'http://localhost:3030', 'http://localhost:3000',]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -54,30 +54,27 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "corsheaders.middleware.CorsPostCsrfMiddleware",
-
 ]
 
-# CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3030',
-# ]
 CORS_ALLOW_ALL = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3030',
-#     'http://localhost:3002',
-#     'http://localhost:3000',
-#     'http://localhost:8000'
-# )
-
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w+\.example\.com$",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 ROOT_URLCONF = 'yugioh.urls'
