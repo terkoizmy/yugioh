@@ -54,8 +54,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    # "django.middleware.csrf.CsrfViewMiddleware",
-    # "corsheaders.middleware.CorsPostCsrfMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",
 
 ]
 
@@ -76,12 +76,7 @@ CORS_ALLOW_CREDENTIALS = True
 # ]
 
 CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
     "POST",
-    "PUT",
 ]
 
 CORS_ALLOW_HEADERS = [
