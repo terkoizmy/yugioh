@@ -78,7 +78,6 @@ class UserView(APIView):
             return JsonResponse({'message': 'User Not Found'}, status=status.HTTP_404_NOT_FOUND)
         
         user = User.objects.filter(id=payload['id']).first()
-        print(user)
         serializer = UserSerializer(user)
         return Response(serializer.data)
        
@@ -107,9 +106,7 @@ class DeckView(APIView):
         if Author is None:
             return JsonResponse({'message': 'User Not Found'}, status=status.HTTP_404_NOT_FOUND)
         
-        print(payload)
         deck = Decks.objects.filter(username = payload['username'])
-        print(deck)
         serializer = DeckSerializer(deck, many=True)
         
         return Response(serializer.data)
@@ -129,7 +126,6 @@ class DeckRegisterView(APIView):
         # Authorization
         
         Author = User.objects.filter(username = payload['username'])
-        print(Author)
         
         if Author is None:
             return JsonResponse({'message': 'User or Deck Not Found'}, status=status.HTTP_404_NOT_FOUND)
