@@ -69,6 +69,13 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3030',
+    'http://localhost:3002',
+    'http://localhost:3000',
+    'http://localhost:8000'
+)
+
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w+\.example\.com$",
 ]
