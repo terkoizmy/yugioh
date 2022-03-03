@@ -62,6 +62,8 @@ class LoginView(APIView):
 class UserView(APIView):
     @csrf_exempt
     def get(self, request):
+        
+        
         token = request.headers.get('jwt')
         
         if not token:

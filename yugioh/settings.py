@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "corsheaders.middleware.CorsPostCsrfMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -56,21 +57,27 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
-    "corsheaders.middleware.CorsPostCsrfMiddleware",
+    
 ]
 # CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_HEADERS = ['*']
 
-CORS_ALLOWED_ORIGINS = [
-    "http://read.only.com",
-    "http://change.allowed.com",
+CORS_ORIGIN_WHITELIST = [
+'http://localhost:3000',
+'http://127.0.0.1:3000'
 ]
 
-CORS_ORIGIN_WHITELIST = (
-'http://localhost:3000',  # for localhost (REACT Default)
-'http://192.168.10.45:3000', # for network
-)
+# CORS_ALLOWED_ORIGINS = [
+#     "http://read.only.com",
+#     "http://change.allowed.com",
+# ]
+
+# CORS_ORIGIN_WHITELIST = (
+# 'http://localhost:3000',  # for localhost (REACT Default)
+# 'http://127.0.0.1:3000', # for network
+# )
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:3000',
@@ -142,6 +149,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
