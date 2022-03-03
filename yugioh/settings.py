@@ -58,9 +58,9 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "corsheaders.middleware.CorsPostCsrfMiddleware",
 ]
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://read.only.com",
