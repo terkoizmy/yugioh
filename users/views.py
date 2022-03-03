@@ -67,7 +67,7 @@ class UserView(APIView):
         token = request.headers.get('jwt')
         
         if not token:
-            raise AuthenticationFailed('Unauthenticated!')
+            return Response (AuthenticationFailed('Unauthenticated!'))
         
         try:
             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
