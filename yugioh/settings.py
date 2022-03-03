@@ -61,13 +61,18 @@ MIDDLEWARE = [
     'users.middleware.open_access_middleware'
 ]
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://read.only.com",
     "http://change.allowed.com",
 ]
+
+CORS_ORIGIN_WHITELIST = (
+'http://localhost:3000',  # for localhost (REACT Default)
+'http://192.168.10.45:3000', # for network
+)
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:3000',
