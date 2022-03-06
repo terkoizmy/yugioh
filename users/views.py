@@ -147,7 +147,7 @@ class DeckRegisterView(APIView):
     
 class PickDeck(APIView):
     @csrf_exempt
-    def post(self, request, nd):
+    def get(self, request, nd):
         token = request.headers.get('jwt')
         
         if not token:
