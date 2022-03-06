@@ -67,7 +67,7 @@ class UserView(APIView):
         token = request.headers.get('jwt')
         
         if not token:
-            return Response (AuthenticationFailed('Unauthenticated!'))
+            raise AuthenticationFailed('Unauthenticated!')
         
         try:
             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
@@ -147,8 +147,8 @@ class DeckRegisterView(APIView):
     
 class PickDeck(APIView):
     @csrf_exempt
-    def post(self, request, pk):
-        token = request.COOKIES.get('jwt')
+    def post(self, request, nd):
+        token = request.headers.get('jwt')
         
         if not token:
             raise AuthenticationFailed('Unauthenticated!')
@@ -156,12 +156,10 @@ class PickDeck(APIView):
             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated!')
-        
-        deck = Decks.objects.get(pk=pk)
+        deck = Decks.objects.filter(name_deck=nd, username=payload['username'])
         if deck is None:
             return JsonResponse({'message': 'Deck not found'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        serializer = DeckSerializer(deck)
+        serializer = DeckSerializer(deck , many=True)
         return Response(serializer.data)
     
 class SaveDeck(APIView):
