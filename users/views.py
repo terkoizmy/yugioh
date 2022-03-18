@@ -113,7 +113,6 @@ class DeckView(APIView):
         
         return Response(serializer.data)
 
-@csrf_exempt
 class DeckRegisterView(APIView):
     @csrf_exempt
     def post(self, request):

@@ -75,10 +75,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000'
 ]
 
-# CORS_ORIGIN_WHITELIST = (
-# 'http://localhost:3000',  # for localhost (REACT Default)
-# 'http://127.0.0.1:3000', # for network
-# )
+CORS_ORIGIN_WHITELIST = (
+'http://localhost:3000',  # for localhost (REACT Default)
+'http://127.0.0.1:3000', # for network
+)
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:3000',
