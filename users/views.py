@@ -112,7 +112,8 @@ class DeckView(APIView):
         serializer = DeckSerializer(deck, many=True)
         
         return Response(serializer.data)
-    
+
+@csrf_exempt
 class DeckRegisterView(APIView):
     @csrf_exempt
     def post(self, request):
