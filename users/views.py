@@ -164,7 +164,7 @@ class PickDeck(APIView):
     
 class SaveDeck(APIView):
     @csrf_exempt
-    def put(self, request, pk):
+    def put(self, request):
         token = request.headers.get('jwt')
         
         if not token:
@@ -177,14 +177,14 @@ class SaveDeck(APIView):
         Author = Decks.objects.filter(username = payload['username'], name_deck= request.data['name_deck'])
         
         if Author is None:
-            return JsonResponse({'message': 'User Not Found'}, status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse({'message': 'User or Deck Not Found'}, status=status.HTTP_404_NOT_FOUND)
+        newDeck= {
+            'username': payload['username'],
+            'name_deck': request.data['name_deck'],
+            'card': request.data['card']
+        }
         
-        deck = Decks.objects.get(pk=pk)
-        
-        
-        if deck is None:
-            return JsonResponse({'message': 'Deck not found'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = DeckSerializer(deck,data=request.data)
+        serializer = DeckSerializer(Author,data=newDeck)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
