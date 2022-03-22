@@ -173,9 +173,8 @@ class SaveDeck(APIView):
             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated!')
-        print(request.data['name_deck'])
-        Author = Decks.objects.filter(username = payload['username'], name_deck= request.data['name_deck'])
-        
+        Author = Decks.objects.get(username = payload['username'], name_deck= request.data['name_deck'])
+        print(Author)
         if Author is None:
             return JsonResponse({'message': 'User or Deck Not Found'}, status=status.HTTP_404_NOT_FOUND)
         newDeck= {
@@ -186,6 +185,7 @@ class SaveDeck(APIView):
         
         serializer = DeckSerializer(Author,data=newDeck)
         if serializer.is_valid():
+            print("berhasil")
             serializer.save()
             return Response(serializer.data)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

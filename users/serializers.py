@@ -21,4 +21,4 @@ class DeckSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         db_table = 'decks'
         model = Decks
-        fields = ('id','username', 'name_deck', 'card')
+        fields = ('username', 'name_deck', 'card')
